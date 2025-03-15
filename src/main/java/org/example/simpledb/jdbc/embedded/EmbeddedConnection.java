@@ -46,6 +46,7 @@ class EmbeddedConnection extends ConnectionAdapter {
     */
    public void commit() throws SQLException {
       currentTx.commit();
+      db.printFileMgrStats("COMMIT");
       currentTx = db.newTx();
    }
 
@@ -54,6 +55,7 @@ class EmbeddedConnection extends ConnectionAdapter {
     */
    public void rollback() throws SQLException {
       currentTx.rollback();
+      db.printFileMgrStats("ROLLBACK");
       currentTx = db.newTx();
    }
 

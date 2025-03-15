@@ -22,7 +22,9 @@ public class Page {
    }
 
    public void setInt(int offset, int n) {
-      bb.putInt(offset, n);
+      if ((offset + Integer.BYTES) < bb.capacity()) {
+         bb.putInt(offset, n);
+      }
    }
 
    public byte[] getBytes(int offset) {
@@ -34,9 +36,11 @@ public class Page {
    }
 
    public void setBytes(int offset, byte[] b) {
-      bb.position(offset);
-      bb.putInt(b.length);
-      bb.put(b);
+      if ((offset + b.length) < bb.capacity()) {
+         bb.position(offset);
+         bb.putInt(b.length);
+         bb.put(b);
+      }
    }
    
    public String getString(int offset) {

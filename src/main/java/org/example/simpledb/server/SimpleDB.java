@@ -91,5 +91,9 @@ public class SimpleDB {
    }   
    public BufferMgr bufferMgr() {
       return bm;
-   }   
+   }
+   public void printFileMgrStats(String stage) {
+      System.out.println("Stage=" + stage + "|readCount=" + fm.getReadCount() + "|writeCount=" + fm.getWriteCount());
+      fm.resetCounts();
+   }
  }
